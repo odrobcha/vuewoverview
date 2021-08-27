@@ -1,16 +1,22 @@
 <template>
 <div>
+  <base-dialog :show="!!error" title="Error occurred!" @close="handleError">
+    <p>{{ error }}</p>
+  </base-dialog>
   <div>
     <coach-filter @change-filter="setFilter"></coach-filter>
   </div>
   <section>
     <base-card>
       <div class="controls">
-        <base-button mode="outline">Refresh</base-button>
-        <base-button link v-if="!isCoach" to="/register">Register as a Coach</base-button>
+        <base-button mode="outline" @click.native="loadCoaches(true)">Refresh</base-button>
+        <base-button link v-if="!isCoach && !isLoading" to="/register">Register as a Coach</base-button>
+      </div>
+      <div v-if="isLoading">
+        <base-spinner></base-spinner>
       </div>
 
-      <ul v-if="hasCoaches">
+      <ul v-else-if="hasCoaches">
         <coach-item v-for="coach in filteredCoaches"
                     :key="coach.id"
                     :id="coach.id"
@@ -36,23 +42,31 @@ import CoachItem from "@/components/coaches/CoachItem";
 import BaseCard from "@/components/ui/BaseCard";
 import BaseButton from "@/components/ui/BaseButton";
 import CoachFilter from "@/components/coaches/CoachFilter";
+import BaseSpinner from "@/components/ui/BaseSpinner";
+import BaseDialog from "@/components/ui/BaseDialog";
 export default {
   name: "CoachesList",
   components: {
+    BaseDialog,
+    BaseSpinner,
     BaseButton,
     BaseCard,
     CoachItem,
     CoachFilter
   },
+  created(){
+   this.loadCoaches();
+  },
   data(){
     return{
+      error: null,
+      isLoading: false,
       activeFilters:{
         frontend: true,
         backend: true,
         career: true,
       }
     }
-
   },
 
   computed: {
@@ -73,7 +87,7 @@ export default {
       });
     },
     hasCoaches() {
-      return this.$store.getters['coaches/hasCoaches'];
+      return !this.isLoading && this.$store.getters['coaches/hasCoaches'];
     },
 
       isCoach() {
@@ -83,7 +97,21 @@ export default {
    methods:{
     setFilter(updatedFilters){
       this.activeFilters = updatedFilters;
-    }
+    },
+
+     async loadCoaches(refresh= false){
+      this.isLoading=true;
+      try{
+        await this.$store.dispatch('coaches/loadCoaches', {forceRefresh: refresh});
+      } catch(error) {
+        this.error =error.message ||'Something went wrong';
+      }
+
+      this.isLoading = false;
+     },
+     handleError(){
+       this.error= null;
+     }
    }
 }
 </script>

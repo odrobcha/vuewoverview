@@ -35,14 +35,13 @@ export default {
       this.formIsValid = true;
       if(this.email ==='' || !this.email.includes('@')|| this.message === ''){
         this.formIsValid = false;
-        console.log('ok');
         return;
       }
       this.$store.dispatch('requests/contactCoach', {
         email: this.email,
         message: this.message,
         coachId: this.$route.params.id,   //to get id (as ut is dynamic from child route of CoachDetail or it can be done via props
-      })
+      });
       this.$router.replace('/coaches');
 
     }

@@ -3,8 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from "@/store";
 import BaseCard from "@/components/ui/BaseCard";
-import BaseButton from "@/components/ui/BaseButton";
 import BaseBadge from "@/components/ui/BaseBadge";
+import BaseSpinner from '@/components/ui/BaseSpinner'
+import BaseDialog from "@/components/ui/BaseDialog";
+
+import BaseButton from "@/components/ui/BaseButton";
 
 Vue.config.productionTip = false
 
@@ -15,4 +18,6 @@ new Vue({
   BaseCard,
   BaseButton,
   BaseBadge,
+  BaseSpinner,
+  BaseDialog
 }).$mount('#app')

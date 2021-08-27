@@ -74,6 +74,7 @@ export default {
         isValid: true
       },
       formIsValid: true,
+      coachId: 'c3',
     }
   },
 
@@ -118,6 +119,7 @@ export default {
         desc: this.description.val,
         rate: this.rate.val,
         areas: this.areas.val,
+
       };
       this.$emit('saveData', formData);
 
