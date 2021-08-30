@@ -7,6 +7,7 @@ import CoachesList from "@/pages/coaches/CoachesList";
 import CoachRegistration from "@/pages/coaches/CoachRegistration";
 import ContactCoach from "@/pages/requests/ContactCoach";
 import RequestsReceived from "@/pages/requests/RequestsReceived";
+import UserAuth from "@/pages/auth/UserAuth";
 import NotFound from "@/pages/NotFound";
 
 const router = new VueRouter({
@@ -23,6 +24,7 @@ const router = new VueRouter({
             ]},
         {path: '/register', component: CoachRegistration},
         {path: '/requests', component: RequestsReceived},
+        {path: '/auth', component: UserAuth},
         {path: '/:notFound(.*)', component: NotFound}, //to handle any other routs entered in address line to show the error
 
     ],

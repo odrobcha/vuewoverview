@@ -13,7 +13,6 @@
 
       <ul v-else-if="hasRequests && !isLoading">
         <request-item v-for="req in recievedRequest" :key="req.id" :email="req.userEmail" :message="req.message">
-          {{}}
 
         </request-item>
 

@@ -9,8 +9,9 @@ export default {
             hourlyRate: data.rate,
             areas: data.areas,
         };
+        const token = contex.rootGetters.token;
 
-       const response = await fetch(`https://vueoverview-default-rtdb.europe-west1.firebasedatabase.app/coaches/${userId}.json`, {
+       const response = await fetch(`https://vueoverview-default-rtdb.europe-west1.firebasedatabase.app/coaches/${userId}.json?auth=` + token, {
             method: 'PUT',
             body:JSON.stringify(coachData),
         });

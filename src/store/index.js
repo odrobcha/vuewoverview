@@ -4,23 +4,17 @@ Vue.use(Vuex);
 
 import coachesModule from'./modules/coaches/index'
 import requestsModule from'./modules/request/index'
+import authModule from './modules/auth/index'
 
 const store = new Vuex.Store({
     modules: {
         coaches: coachesModule,
         requests: requestsModule,
-    },
-    state(){
-        return{
-            userId: 'c3',
-        }
+        auth: authModule,
     },
 
-    getters:{
-        userId(state){
-            return state.userId;
-        }
-    }
+
+
 });
 
 export default store;
