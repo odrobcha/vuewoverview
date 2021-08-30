@@ -11,7 +11,7 @@
       <div class="controls">
         <base-button mode="outline" @click.native="loadCoaches(true)">Refresh</base-button>
         <base-button link v-if="!isCoach && !isLoading && isLoggedIn" to="/register">Register as a Coach</base-button>
-        <base-button link to="/auth" v-if="!isLoggedIn">login</base-button>
+        <base-button link to="/auth?redirect=register" v-if="!isLoggedIn">Login to Register as a Coach</base-button>
       </div>
       <div v-if="isLoading">
         <base-spinner></base-spinner>

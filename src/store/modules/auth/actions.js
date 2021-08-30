@@ -48,5 +48,20 @@ export default {
             tokenExpiration: responseData.expiresIn,
 
         })
+    },
+
+    logout(context){
+        //no need to send request, as server do not save any data about user and session
+       // state.token = null;
+       // //state.userId = null;
+       // state.tokenExpiration = null;
+
+
+        context.commit('setUser', {
+            token: null,
+            userId: null,
+            tokenExpiration: null,
+        })
     }
+
 }

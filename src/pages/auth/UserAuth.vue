@@ -89,12 +89,14 @@ export default {
         } else {
           await this.$store.dispatch('signup', actionPayload);
         }
+        const redirectUrl = '/' + (this.$route.query.redirect  || 'coaches'); // should be the same as query parameter name in CoachesList in 'Login to register as a Coaach' button
+        await this.$router.replace(redirectUrl);
       } catch (error){
         this.error =error.message || 'Failed to auth'
       }
 
       this.isLoading = false;
-      await this.$router.replace('/coaches');
+
 
     },
     switchAuthMode() {
